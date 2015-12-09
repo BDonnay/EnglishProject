@@ -94,7 +94,7 @@ void draw()
    f = createFont("Ariel", 16, true);
   textFont(f, 16);
   fill(0);
-  text("Score   Wild " + TS1 / 2 + " Opponent " + TS2 / 2, 20, 20);
+  text("Score   Wild " + TS1 + " Opponent " + TS2, 20, 20);
   ellipse(xpos, ypos, rad, rad);
  
     if (keyz[0] == true){
