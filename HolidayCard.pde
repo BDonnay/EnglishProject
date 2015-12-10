@@ -114,6 +114,10 @@ void draw()
       if(blockerY2 <= height - blockerH2) {
           blockerY2 = blockerY2 + blockerH2*0.2;
       }}
+    if (TS1 >= 14 || TS2 >= 14){
+      noLoop();
+      //reDraw(); __ Wins
+    }
   }
   
   
