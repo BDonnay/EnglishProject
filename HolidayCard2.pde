@@ -90,7 +90,7 @@ void draw()
   if (location.x == 980 && (location.y > 170 && location.y < 330)){
       TS2++;
   }
-  if (dist(location.x, location.y, blockerX, blockerY) < (blockerW + rad) / 2){
+  if (dist(location.x, location.y, blockerX, blockerY) <= (blockerW + rad) / 2){
     velocity.x = velocity.x * -1;
    // velocity.y = velocity.y * -1;
   }
@@ -101,7 +101,8 @@ void draw()
    f = createFont("Ariel", 16, true);
   textFont(f, 16);
   fill(0);
-  text("Score   Wild " + TS1 / 2 + " Opponent " + TS2 / 2, 20, 20);
+  text("Score   Opponent " + TS2 / 2, 20, 20);
+  text("Score Wild " + TS1 / 2, 880, 20);
    ellipse(location.x,location.y, rad ,rad);
  
   if (keyz[0] == true){
@@ -135,4 +136,9 @@ void draw()
     if (keyz[7] == true){
       if(blockerX2 <= 500 - .5 * blockerW) {
           blockerX2 = blockerX2 + blockerW2*0.1;
-      }    }}
+      }}  
+    if (TS1 >= 14 || TS2 >= 14){
+      noLoop();
+      //reDraw(); __ Wins
+    }
+  }
