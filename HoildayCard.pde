@@ -1,77 +1,144 @@
+int rad = 40;        // Width of the shape 
+int TS1 = 0;
+int TS2 = 0;
+PVector location;
+PVector velocity;
+float xspeed = 5;  // Speed of the shape
+float yspeed = 5;  // Speed of the shape
+PFont f;
+int xdirection = 1;  // Left or Right
+int ydirection = 1;  // Top to Bottom
+float blockerX = 10;
+float blockerY = 10;
+float blockerW = 75;
+float blockerH = 75;
+float blockerX2 = 10;
+float blockerY2 = 10;
+float blockerW2 = 75;
+float blockerH2 = 75;
 
-float [] xPosition = new float[100];
-float [] yPosition = new float[100];
-int [] flakeSize = new int[100];
-int [] direction = new int[100];
-int minFlakeSize = 4;
-int maxFlakeSize = 5;
+boolean keyz[] = new boolean [8];
+
+void keyPressed() {
+  if (keyCode == UP) keyz[0] = true;
+  if (keyCode == DOWN) keyz[1] = true;
+  if (key == 'w') keyz[2] = true;
+  if (key == 's') keyz[3] = true;
+  if (keyCode == LEFT) keyz[4] = true;
+  if (keyCode == RIGHT) keyz[5] = true;
+  if (key == 'a') keyz[6] = true;
+  if (key == 'd') keyz[7] = true;}
+  
+void keyReleased() {
+   if (keyCode == UP) keyz[0] = false;
+  if (keyCode == DOWN) keyz[1] = false;
+  if (key == 'w') keyz[2] = false;
+  if (key == 's') keyz[3] = false;
+  if (keyCode == LEFT) keyz[4] = false;
+  if (keyCode == RIGHT) keyz[5] = false;
+  if (key == 'a') keyz[6] = false;
+  if (key == 'd') keyz[7] = false;}
 
 
-void setup(){
-size (700,500);
-ellipseMode(CENTER);
-noStroke();
-  for(int i = 0; i < 100; i++) {
-    flakeSize[i] = round(random(minFlakeSize, maxFlakeSize));
-    xPosition[i] = random(600,800);
-    yPosition[i] = random(100, 50);
-    direction[i] = round(random(0, 1));
-  }
+void setup() 
+{
+  size(1000, 500);
+  fill(233,20,31);
+  noStroke();
+  frameRate(30);
+  ellipseMode(CENTER);
+  location = new PVector(width / 2, height /2);
+  velocity = new PVector(5,5);
+  frameRate(60);
+  blockerX = width - 40;
+  blockerX2 = 30;
+  
 }
 
-void draw(){
-background(47,79,79);
-textSize(48);
-fill(255,0,0);
-text("Merry", 50,50);
-fill(0,255,0);
-text("Christmas",50,100);
-fill(66,36,18);
-rect(100,450,100,50);
-fill(47,79,79);
-ellipse(100,475,40,50);
-ellipse(200,475,40,50);
-fill(0,100,0);
-triangle(50,450,150,300,250,450);
-triangle(65,385,150,250,235,385);
-triangle(75,325,150,220,225,325);
-fill(255,198,0);
- beginShape();
-  vertex(150, 150);
-  vertex(164, 180);
-  vertex(197, 185);
-  vertex(173, 207);
-  vertex(179, 240);
-  vertex(150, 225);
-  vertex(121, 240);
-  vertex(127, 207);
-  vertex(103, 185);
-  vertex(136, 180);
-  endShape(CLOSE);
-  fill(66,36,18);
-  rect(375,25,250,250); 
-  fill(97,203,255);
-  rect(400,50,200,200);
+void draw() 
+{
+  background(255);
+  fill(210,35,29);
+  ellipse(0,250,171,171);//oppgoalcir
+  ellipse(1000,250,171,171);//wildgoalcir
+  ellipse(500,250,171,171);//centercircle
   fill(255);
-  for(int i = 0; i < xPosition.length; i++) {
-    
-    ellipse(xPosition[i], yPosition[i], flakeSize[i], flakeSize[i]);
-    
-    if(direction[i] == 0) {
-      xPosition[i] += map(flakeSize[i], minFlakeSize, maxFlakeSize, .1, .5);
-    } else {
-      xPosition[i] -= map(flakeSize[i], minFlakeSize, maxFlakeSize, .1, .5);
-    }
-    
-    yPosition[i] += flakeSize[i] + direction[i]; 
-    
-    if(xPosition[i] > 600 - flakeSize[i] || xPosition[i] < 400 + flakeSize[i] || yPosition[i] > 250 - flakeSize[i]) {
-      xPosition[i] = random(400, 600);
-      yPosition[i] = random(50,100);
-    }
-    
+  ellipse(0,250,161,161);//oppgoalcirlcefill
+  ellipse(1000,250,161,161);//wildgoalcirclefill
+  ellipse(500,250,161,161);//centerwhite
+  fill(210,35,29);
+  ellipse(500,250,30,30);//centerdot
+  rect(495,0,10,500);
+  fill(233,70,228);
+  rect(0, 170, 4, 160);//goal opp
+  fill(22,133,32);
+  rect(996, 170, 4, 160);//goal wild
+  fill(22,133,32);
+  ellipse(blockerX, blockerY, blockerW, blockerH);
+  fill(233, 70, 228);
+  ellipse(blockerX2, blockerY2, blockerW2, blockerH2);
+  location.add(velocity);
+  if (location.x > width || location.x < 0) {
+    velocity.x = velocity.x * -1;
   }
-  fill(66,36,18);
-  rect(490,25,20,240);
-  rect(400,140,200,20);
-}
+ if (location.y > height || location.y < 0) {
+    velocity.y = velocity.y * -1; 
+  }
+  if (location.x == 20 &&(location.y > 170 && location.y < 330)){
+      TS1++;
+  }
+  if (location.x == 980 && (location.y > 170 && location.y < 330)){
+      TS2++;
+  }
+  if (dist(location.x, location.y, blockerX, blockerY) <= (blockerW + rad) / 2){
+    velocity.x = velocity.x * -1;
+   // velocity.y = velocity.y * -1;
+  }
+    if (dist(location.x, location.y, blockerX2, blockerY2) < (blockerW + rad) /2){
+    velocity.x = velocity.x * -1;
+    //velocity.y = velocity.y * -1;
+  }
+   f = createFont("Ariel", 16, true);
+  textFont(f, 16);
+  fill(0);
+  text("Score   Opponent " + TS2 / 2, 20, 20);
+  text("Score Wild " + TS1 / 2, 880, 20);
+   ellipse(location.x,location.y, rad ,rad);
+ 
+  if (keyz[0] == true){
+      if (blockerY >= 0) {
+          blockerY = blockerY - blockerH*0.1;
+      }}
+  if (keyz[1] == true){
+      if(blockerY <= height - .5 *blockerH) {
+          blockerY = blockerY + blockerH*0.1;
+      }}
+    if (keyz[2] == true){
+      if (blockerY2 >= 37) {
+          blockerY2 = blockerY2 - blockerH2*0.1;
+      }}
+    if (keyz[3] == true){
+      if(blockerY2 <= height - .5 *blockerH2) {
+          blockerY2 = blockerY2 + blockerH2*0.1;
+      }}
+    if (keyz[4] == true){
+      if (blockerX >= 537 && blockerX <= 1000) {
+          blockerX = blockerX - blockerW*0.1;
+      }}
+    if (keyz[5] == true){
+      if(blockerX <= width - .5 * blockerW) {
+          blockerX = blockerX + blockerW*0.1;
+      }}
+    if (keyz[6] == true){
+      if (blockerX2 <= 467 && blockerX2 >= 0){
+          blockerX2 = blockerX2 - blockerW2*0.1;
+      }}
+    if (keyz[7] == true){
+      if(blockerX2 <= 500 - .5 * blockerW) {
+          blockerX2 = blockerX2 + blockerW2*0.1;
+      }}  
+    if (TS1 >= 14 || TS2 >= 14){
+      noLoop();
+      //reDraw(); __ Wins
+    }
+  }
