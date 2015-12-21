@@ -1,9 +1,9 @@
 
-float [] xPosition = new float[100];
-float [] yPosition = new float[100];
-int [] flakeSize = new int[100];
-int [] direction = new int[100];
-int minFlakeSize = 4;
+float [] xPosition = new float[300];
+float [] yPosition = new float[300];
+int [] flakeSize = new int[300];
+int [] direction = new int[300];
+int minFlakeSize = 1;
 int maxFlakeSize = 5;
 
 
@@ -11,7 +11,7 @@ void setup(){
 size (700,500);
 ellipseMode(CENTER);
 noStroke();
-  for(int i = 0; i < 100; i++) {
+  for(int i = 0; i < 300; i++) {
     flakeSize[i] = round(random(minFlakeSize, maxFlakeSize));
     xPosition[i] = random(600,800);
     yPosition[i] = random(100, 50);
@@ -29,8 +29,8 @@ text("Christmas",50,100);
 fill(66,36,18);
 rect(100,450,100,50);
 fill(47,79,79);
-ellipse(100,475,40,50);
-ellipse(200,475,40,50);
+ellipse(100,450,40,100);
+ellipse(200,450,40,100);
 fill(0,100,0);
 triangle(50,450,150,300,250,450);
 triangle(65,385,150,250,235,385);
@@ -67,7 +67,7 @@ fill(255,198,0);
     
     if(xPosition[i] > 600 - flakeSize[i] || xPosition[i] < 400 + flakeSize[i] || yPosition[i] > 250 - flakeSize[i]) {
       xPosition[i] = random(400, 600);
-      yPosition[i] = random(50,100);
+      yPosition[i] = random(50 + flakeSize[i],100);
     }
     
   }
