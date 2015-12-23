@@ -6,7 +6,6 @@ int [] direction = new int[300];
 int minFlakeSize = 1;
 int maxFlakeSize = 5;
 
-
 void setup(){
 size (700,500);
 ellipseMode(CENTER);
