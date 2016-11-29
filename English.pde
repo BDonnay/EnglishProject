@@ -110,7 +110,7 @@ void mousePressed() {
         Peacock Al = new Peacock();
         peacocks.add(Al);
         funds += 1;
-        if(funds >= 10){
+        if(funds >= 50){
           isSaved = true;
           live = false;
         }
