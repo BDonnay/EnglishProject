@@ -153,9 +153,6 @@ void colorWave() {
   if(live){
   colorBarrier += 0.5;
   }
-  if(isSaved){
-  colorBarrier = 0;
-  }
   if (colorBarrier > yvalues.length ) {
     live = false;
   }
@@ -166,7 +163,7 @@ void drawTrees() {
     for (int j = 0; j < 3; j++) {
       fill(169, 112, 91);
       rect(i * (width/10) + (width/20), j * (height/10) + (height/1.5), width/75, height/15);
-      if ((i * (width/157.894736842) + width/300)*(width/750) < colorBarrier) {
+      if ((i * (width/157.894736842) + width/300)*(width/750) < colorBarrier && isSaved == false) {
         fill(0);
       } else {
         fill(0, 255, 0);
