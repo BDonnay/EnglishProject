@@ -48,7 +48,7 @@ void setup() {
   dx = (TWO_PI / period) * xspacing;
   yvalues = new float[w/xspacing];
   colorBarrier = 0;
-  frameRate(120);
+  frameRate(5);
   mine = loadImage("mine3.gif");
   peacock = loadImage("peacock.png");
   candy = loadImage("Candy_Stash.png");
