@@ -150,8 +150,12 @@ void renderWave() {
   }
 }
 void colorWave() {
-  //colorBarrier += (width/6000);
+  if(live){
   colorBarrier += 0.5;
+  }
+  if(isSaved){
+  colorBarrier = 0;
+  }
   if (colorBarrier > yvalues.length ) {
     live = false;
   }
