@@ -21,14 +21,6 @@ boolean isSaved;
 ArrayList<PVector> candyLoc;
 int goal = 15;
 
-/*void mousePressed() {
- for(for each loop incrementing though the peapeacocks){ 
- if(the mousepressed within the demesions of the peacock){
- colorbarrier -=10;
- }
- }
- }*/
-
 void setup() {
   size(1500, 750);
 
