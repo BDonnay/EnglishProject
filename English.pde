@@ -19,7 +19,7 @@ int funds;
 boolean live;
 boolean isSaved;
 ArrayList<PVector> candyLoc;
-int goal = 30;
+int goal = 50;
 
 void setup() {
   size(1500, 750);
