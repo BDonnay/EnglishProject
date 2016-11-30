@@ -80,7 +80,9 @@ void draw() {
     peacocks.get(i).display();
   }
   drawTrees();
+  if(isSaved == false){
   image(mine, 0, 0, width/5, height/2.5);
+  }
   text("Money Raised: " + funds*60 + "/" + goal*60, 1100, 25);
 
   if (live == false) {
