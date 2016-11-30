@@ -19,6 +19,7 @@ int funds;
 boolean live;
 boolean isSaved;
 ArrayList<PVector> candyLoc;
+int goal = 25;
 
 /*void mousePressed() {
  for(for each loop incrementing though the peapeacocks){ 
@@ -80,7 +81,7 @@ void draw() {
   }
   drawTrees();
   image(mine, 0, 0, width/5, height/2.5);
-  text("Pinata Count: " + funds, 1200, 25);
+  text("Money Raised: " + funds*60 + "/" + goal*60, 1100, 25);
 
   if (live == false) {
     if (isSaved) {
@@ -110,7 +111,7 @@ void mousePressed() {
         Peacock Al = new Peacock();
         peacocks.add(Al);
         funds += 1;
-        if(funds >= 50){
+        if(funds >= goal){
           isSaved = true;
           live = false;
         }
