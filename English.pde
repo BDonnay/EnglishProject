@@ -19,7 +19,7 @@ int funds;
 boolean live;
 boolean isSaved;
 ArrayList<PVector> candyLoc;
-int goal = 25;
+int goal = 15;
 
 /*void mousePressed() {
  for(for each loop incrementing though the peapeacocks){ 
