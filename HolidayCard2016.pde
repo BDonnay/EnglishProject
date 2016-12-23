@@ -50,7 +50,7 @@ void draw() {
   fill(219,65,45);
   rect(275,390,50,20);
   image(snowman,278,432,40,40);
-}
+}}
 
 void star(float x, float y, float radius1, float radius2, int npoints) {
   float angle = TWO_PI / npoints;
