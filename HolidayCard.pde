@@ -1,77 +1,83 @@
+flake[] flake = new flake[0];
+int total = 500;
 
-float [] xPosition = new float[300];
-float [] yPosition = new float[300];
-int [] flakeSize = new int[300];
-int [] direction = new int[300];
-int minFlakeSize = 1;
-int maxFlakeSize = 5;
+void setup () {
+  size (1200, 800);
+}
 
+void draw() {
+  background(14,35,61);
+  fill(255);
+  flake = (flake[]) append(flake, new flake(300, 0));
 
-void setup(){
-size (700,500);
-ellipseMode(CENTER);
-noStroke();
-  for(int i = 0; i < 300; i++) {
-    flakeSize[i] = round(random(minFlakeSize, maxFlakeSize));
-    xPosition[i] = random(600,800);
-    yPosition[i] = random(100, 50);
-    direction[i] = round(random(0, 1));
+  if (flake.length>total) {
+    flake = (flake[]) subset(flake, 1);
+  }
+
+  for (int i=0; i<flake.length; i++) {
+    flake[i].x += flake[i].xVel;
+    flake[i].y += flake[i].yVel;
+    ellipse(flake[i].x, flake[i].y, flake[i].diameter, flake[i].diameter);
+  }
+  fill(255);
+  rect(0,700,1200,100);
+  textSize(80);
+  fill(219,65,45);
+  text("Merry", 150, 200);
+  fill(14,140,15);
+  text("Christmas", 150,300);
+  triangle(800,600,950,400,1100,600);
+  triangle(825,500,950,300,1075,500);
+  triangle(850,400,950,200,1050,400);
+  fill(139,69,19);
+  rect(900,600,100,100);
+  fill(255,255,0);
+  star(950,200,75,25,6);
+  fill(219,65,45);
+  ellipse(900,550,35,35);
+  ellipse(975,350,35,35);
+  ellipse(925,450,35,35);
+  ellipse(985,525,35,35);
+  ellipse(900,550,35,35);
+  fill(255);
+  ellipse(300,625,150,150);
+  ellipse(300,525,100,100);
+  ellipse(300,450,75,75);
+  fill(0);
+  rect(250,410,100,10);
+  rect(275,360,50,50);
+  fill(219,65,45);
+  rect(275,390,50,20);
+}
+
+class flake {
+
+  float x;  
+  float y;
+  float xVel;
+  float yVel; 
+  float diameter;
+
+  flake(float xpos, float ypos) {
+    x = xpos = random (0, 1200);
+    y = ypos;
+    xVel = random (-2, 2);
+    yVel = random (0, 5);
+    diameter = random (5, 10);
   }
 }
 
-void draw(){
-background(47,79,79);
-textSize(48);
-fill(255,0,0);
-text("Merry", 50,50);
-fill(0,255,0);
-text("Christmas",50,100);
-fill(66,36,18);
-rect(100,450,100,50);
-fill(47,79,79);
-ellipse(100,450,40,100);
-ellipse(200,450,40,100);
-fill(0,100,0);
-triangle(50,450,150,300,250,450);
-triangle(65,385,150,250,235,385);
-triangle(75,325,150,220,225,325);
-fill(255,198,0);
- beginShape();
-  vertex(150, 150);
-  vertex(164, 180);
-  vertex(197, 185);
-  vertex(173, 207);
-  vertex(179, 240);
-  vertex(150, 225);
-  vertex(121, 240);
-  vertex(127, 207);
-  vertex(103, 185);
-  vertex(136, 180);
-  endShape(CLOSE);
-  fill(66,36,18);
-  rect(375,25,250,250); 
-  fill(97,203,255);
-  rect(400,50,200,200);
-  fill(255);
-  for(int i = 0; i < xPosition.length; i++) {
-    
-    ellipse(xPosition[i], yPosition[i], flakeSize[i], flakeSize[i]);
-    
-    if(direction[i] == 0) {
-      xPosition[i] += map(flakeSize[i], minFlakeSize, maxFlakeSize, .1, .5);
-    } else {
-      xPosition[i] -= map(flakeSize[i], minFlakeSize, maxFlakeSize, .1, .5);
-    }
-    
-    yPosition[i] += flakeSize[i] + direction[i]; 
-    
-    if(xPosition[i] > 600 - flakeSize[i] || xPosition[i] < 400 + flakeSize[i] || yPosition[i] > 250 - flakeSize[i]) {
-      xPosition[i] = random(400, 600);
-      yPosition[i] = random(50 + flakeSize[i],100);
-    }
-    
+void star(float x, float y, float radius1, float radius2, int npoints) {
+  float angle = TWO_PI / npoints;
+  float halfAngle = angle/2.0;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) {
+    float sx = x + cos(a) * radius2;
+    float sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a+halfAngle) * radius1;
+    sy = y + sin(a+halfAngle) * radius1;
+    vertex(sx, sy);
   }
-  fill(66,36,18);
-  rect(490,25,20,240);
-  rect(400,140,200,20);
+  endShape(CLOSE);
 }
