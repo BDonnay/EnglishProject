@@ -3,7 +3,7 @@ int total = 500;
 PImage snowman;
 void setup () {
   size (1200, 800);
-  //snowman= loadImage("snowman.jpg");
+  snowman= loadImage("snowman.jpg");
 }
 
 void draw() {
@@ -49,7 +49,22 @@ void draw() {
   rect(275,360,50,50);
   fill(219,65,45);
   rect(275,390,50,20);
-  //image(snowman,278,432,40,40);
+  image(snowman,278,432,40,40);
+}
+
+void star(float x, float y, float radius1, float radius2, int npoints) {
+  float angle = TWO_PI / npoints;
+  float halfAngle = angle/2.0;
+  beginShape();
+  for (float a = 0; a < TWO_PI; a += angle) {
+    float sx = x + cos(a) * radius2;
+    float sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a+halfAngle) * radius1;
+    sy = y + sin(a+halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
 }
 
 class flake {
@@ -67,19 +82,4 @@ class flake {
     yVel = random (0, 5);
     diameter = random (5, 10);
   }
-}
-
-void star(float x, float y, float radius1, float radius2, int npoints) {
-  float angle = TWO_PI / npoints;
-  float halfAngle = angle/2.0;
-  beginShape();
-  for (float a = 0; a < TWO_PI; a += angle) {
-    float sx = x + cos(a) * radius2;
-    float sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a+halfAngle) * radius1;
-    sy = y + sin(a+halfAngle) * radius1;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
 }
