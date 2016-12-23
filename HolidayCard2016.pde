@@ -3,7 +3,7 @@ int total = 500;
 PImage snowman;
 void setup () {
   size (1200, 800);
-  snowman= loadImage("snowman.jpg");
+  //snowman= loadImage("snowman.jpg");
 }
 
 void draw() {
@@ -49,7 +49,7 @@ void draw() {
   rect(275,360,50,50);
   fill(219,65,45);
   rect(275,390,50,20);
-  image(snowman,278,432,40,40);
+  //image(snowman,278,432,40,40);
 }
 
 class flake {
